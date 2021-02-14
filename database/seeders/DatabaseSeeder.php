@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use \App\Models\{User, Album, Photo};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       // \App\Models\User::factory(10)->create();
-    }
+	
+    	/*User::factory(20)->has(
+    		Album::factory(10)->has(
+    			Photo::factory(20)
+    		)
+    	)->create();*/
+	}
 }

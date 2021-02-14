@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\{User, Album};
 
 /*
 |--------------------------------------------------------------------------
@@ -12,15 +13,37 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\
+{
+	PagesController, AlbumsController, PhotosController,
+};
 
-Route::get('/', function () {
-    return view('welcome');
-});
+route::get('/', [AlbumsController::class, 'index']);
 
 
-route::get('article', function(){
-    return 'ciao modno';
-});
 
-use App\Http\Controllers\PagesController;
+Route::patch('albums/{id}', [AlbumsController::class, 'store']);
+
+Route::get('albums/{id}', [AlbumsController::class, 'create']);
+
+Route::post('albums/create', [AlbumsController::class, 'save']);
+
+Route::get('album/{album}/delete', [AlbumsController::class, 'delete']);
+Route::get('photo/{photo}/delete', [PhotosController::class, 'delete']);
+
+Route::get('album/{albums}/edit', [AlbumsController::class, 'edit']);
+
+Route::get('album/{album}/images', [AlbumsController::class, 'getImages'])
+	->name('album.getImages')
+	->where('album', '[0-9]+');
+
+
 route::get('about', [PagesController::class, 'about']);
+
+//route::resource('photos', ['PhotosController']);
+ Route::resource('photos', PhotosController::class);
+
+Route::get('/users', function(){
+	return User::paginate(5);
+});
+
